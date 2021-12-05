@@ -248,7 +248,7 @@ def buildTriangles( slice0, slice1 ):
     # [YOUR CODE HERE]
     runningSum = 0
     for i in range(1, numVerts0+1):
-        minArea[0][i] = int(triangleArea(newList0[i-1].coords,newList1[0].coords,newList0[i].coords) + minArea[0][i-1])
+        minArea[0][i] = triangleArea(newList0[i-1].coords,newList1[0].coords,newList0[i].coords) + minArea[0][i-1]
         minDir[0][i] = Dir.PREV_COL
 
     # Fill in col 0 of minArea and minDir, since it's a special case as there's no col -1
@@ -257,7 +257,7 @@ def buildTriangles( slice0, slice1 ):
     # [YOUR CODE HERE]
     runningSum = 0
     for i in range(1, numVerts1+1):
-        minArea[i][0] = int(triangleArea(newList1[i-1].coords,newList0[0].coords , newList1[i].coords) + minArea[i-1][0])
+        minArea[i][0] = triangleArea(newList1[i-1].coords,newList0[0].coords , newList1[i].coords) + minArea[i-1][0]
         minDir[i][0] = Dir.PREV_ROW
 
     # Fill in the remaining entries of minArea and minDir.  This is very similar to the above, but more general.
@@ -272,10 +272,10 @@ def buildTriangles( slice0, slice1 ):
             minAreaLeft=minArea[r][c-1]+triangleArea(newList0[c-1].coords,newList0[c].coords,newList1[r].coords)
             minAreaUp=minArea[r-1][c]+triangleArea(newList1[r-1].coords,newList0[c].coords,newList1[r].coords)
             if minAreaLeft<minAreaUp:
-                minArea[r][c]=int(minAreaLeft)
+                minArea[r][c]=minAreaLeft
                 minDir[r][c]=Dir.PREV_COL
             else:
-                minArea[r][c] = int(minAreaUp)
+                minArea[r][c] = minAreaUp
                 minDir[r][c] = Dir.PREV_ROW
 
 
